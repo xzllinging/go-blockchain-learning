@@ -1,0 +1,80 @@
+{{ define "modules/article/html/edit" }}
+    {{ template "templates/layouts/html/head" .}}
+    {{ template "templates/layouts/html/navbar" .}}
+    {{ template "templates/layouts/html/header" .}}
+
+    <!-- Begin Form
+    ================================================== -->
+    <div class="col-md-12 col-xs-12">
+        <form class="article-form-container" action="/articles/{{ .article.ID }}/update" method="POST">
+            <div class="form-group">
+                <label class="h4 form-control-label" for="title">标题</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="标题" required="" value="{{ .article.Title }}">
+                <span class="text-danger">{{ .ERRORS.title }}</span>
+            </div>
+
+            <div class="form-group">
+                <label class="h4 form-control-label" for="content">内容</label>
+                <textarea class="form-control" name="content" id="content" placeholder="内容" required="" rows="10">{{ .article.Content }}</textarea>
+                <span class="text-danger">{{ .ERRORS.content }}</span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">保存修改</button>
+            </div>
+        </form>
+    </div>
+    <!-- End Form
+    ================================================== -->
+
+    <style>
+        .article-form-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control-label {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+        .text-danger {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    {{ template "templates/layouts/html/footer" .}}
+    {{ template "templates/layouts/html/foot" .}}
+{{ end }} 

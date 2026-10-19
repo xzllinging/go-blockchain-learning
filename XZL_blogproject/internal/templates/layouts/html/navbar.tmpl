@@ -1,0 +1,53 @@
+{{ define "templates/layouts/html/navbar" }}
+    <!-- Begin Nav
+        ================================================== -->
+    <nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <!-- Begin Logo -->
+            <a class="navbar-brand" href="/">
+                <img src="/assets/img/logo.png" alt="logo">
+            </a>
+            <!-- End Logo -->
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <!-- Begin Menu -->
+                <ul class="navbar-nav ml-auto">
+                    {{ if (eq .AUTH.ID 0) }}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login">登录</a>
+                    </li>
+                    {{ else }}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <img class="float-left profile-thumbnail" src="{{ .AUTH.Image }}" alt="{{ .AUTH.Name }}">
+                            {{ .AUTH.Name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="nav-link" href="/articles/create">创建文章</a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="$('#logout').submit()" class="nav-link">
+                                    退出登录
+                                    <form action="/logout" method="POST" id="logout"></form>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{end }}
+                </ul>
+                <!-- End Menu -->
+                <!-- Begin Search -->
+                <form action="/Search" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" name="title" placeholder="搜索">
+                    <button>搜索</button>
+                </form>
+                <!-- End Search -->
+            </div>
+        </div>
+    </nav>
+    <!-- End Nav
+    ================================================== -->
+{{ end }}
